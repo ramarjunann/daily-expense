@@ -1,0 +1,80 @@
+<section class="g-bg-gray-light-v5">
+  <div class="container g-py-100">
+    <div class="row justify-content-center">
+      <div class="col-sm-10 col-md-9 col-lg-6">
+        <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+          <header class="text-center mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600">Signup</h2>
+          </header>
+
+          <!-- Form -->
+          <form class="g-py-15" (ngSubmit)="onSubmit()" [formGroup]="userForm" name="userForm"
+            novalidate>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 mb-4">
+                <label for="first_name">
+                  <span *ngIf="!userForm.controls.first_name.pristine && !formErrors.first_name"
+                  class="text-success">First Name</span>
+                  <span *ngIf="formErrors.first_name" class="text-danger">{{formErrors.first_name}}</span>
+                </label>
+                <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="text" formControlName="first_name" placeholder="First name">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 mb-4">
+                <label for="last_name">
+                  <span *ngIf="!userForm.controls.last_name.pristine && !formErrors.last_name"
+                  class="text-success">Last Name</span>
+                  <span *ngIf="formErrors.last_name" class="text-danger">{{formErrors.last_name}}</span>
+                </label>
+                <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" formControlName="last_name" placeholder="Last name">
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="email">
+                <span *ngIf="!userForm.controls.email.pristine && !formErrors.email"
+                 class="text-success">Email</span>
+                <span *ngIf="formErrors.email" class="text-danger">{{formErrors.email}}</span>
+              </label>
+              <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" formControlName="email" placeholder="Email">
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 mb-4">
+                <label for="password">
+                  <span *ngIf="!userForm.controls.password.pristine && !formErrors.password"
+                   class="text-success">Password</span>
+                  <span *ngIf="formErrors.password" class="text-danger">{{formErrors.password}}</span>
+                </label>
+                <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="password" placeholder="Password" formControlName="password">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 mb-4">
+                <label for="password_confirmation">
+                  <span *ngIf="!userForm.controls.password_confirmation.pristine && !formErrors.password_confirmation"
+                  class="text-success">Confirmation Password</span>
+                  <span *ngIf="formErrors.password_confirmation" class="text-danger">{{formErrors.password_confirmation}}</span>
+                </label>
+                <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="password" formControlName="password_confirmation" placeholder="Confirmation Password">
+              </div>
+            </div>
+
+            <div class="row justify-content-between mb-5">
+              <div class="col-4 offset-md-8 align-self-center text-right">
+                <button class="btn btn-md u-btn-primary rounded g-py-13 g-px-25" type="submit">Signup
+                </button>
+              </div>
+            </div>
+          </form>
+          <!-- End Form -->
+
+          <footer class="text-center">
+            <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account?
+              <a class="g-font-weight-600" href="page-login-2.html">signin</a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
