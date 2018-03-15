@@ -1,0 +1,53 @@
+<section class="g-bg-gray-light-v5 g-py-15 page-heading">
+  <div class="container">
+    <div class="d-sm-flex text-center">
+      <div class="align-self-center">
+        <h3 class="text-uppercase">Expense Details</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container">
+  <div class="g-py-15">
+    <a class="btn u-btn-bluegray g-font-size-18 text-uppercase text-white g-py-10 g-px-15 btn-separator" *ngIf="tokenService.userSignedIn()" [routerLink]="['/dashboard']">
+        <i class="fa fa-arrow-circle-left back-click"></i>
+    </a>
+  </div>
+
+   <div class="row g-py-15">
+    <div class="col-sm-6 g-mt-30">
+      <div *ngIf="tokenService.userSignedIn()">
+        <a class="btn u-btn-lightred g-font-size-12 text-uppercase g-py-10 g-px-15 g-mr-10 g-mb-15 btn-separator" (click)="removeExpense(expense)"
+           href="javascript:void(0);" title="Delete">
+          <i class="fa fa-trash"> Delete</i>
+        </a>
+        <a class="btn u-btn-teal g-font-size-12 text-uppercase g-py-10 g-px-15 g-mr-10 g-mb-15 btn-separator"
+                 [routerLink]="['/expense/' + expense?.id + '/update']"
+           href="javascript:void(0);" title="Edit">
+          <i class="fa fa-pencil"> Edit</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-py-70">
+    <div class="col-sm-6">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>{{expense?.description}}</td>
+          </tr>
+          <tr>
+            <td>Amount</td>
+            <td>{{expense?.amount}}</td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td>{{expense?.category}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

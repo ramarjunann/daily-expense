@@ -1,0 +1,47 @@
+<section *ngIf="tokenService.currentUserData" class="g-bg-gray-light-v5 g-py-10 page-heading">
+  <div class="container">
+    <div class="d-sm-flex text-center">
+      <div class="align-self-center">
+        <h2 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">Incomes</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container content">
+  <p class="text-right" *ngIf="tokenService.currentUserData && incomes?.length < 1">
+    <a routerLink="/income/add" [queryParams]="{user_id: tokenService.currentUserData.id}" class="btn btn-u btn-primary" title="Add Income">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+  </p>
+  <div class="profile-body margin-bottom-20 top-separator">
+    <div class="row" *ngIf="incomes?.length > 0">
+      <div class="col-md-12">
+        <div id="shortcode4">
+          <div class="shortcode-html">
+            <!-- Basic Table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Created Date</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let income of incomes" >
+                  <td><a [routerLink]="['/income/' + income?.id]">{{income.description}}</a></td>
+                  <td>{{income.amount}}</td>
+                  <td>{{incomep.created_date}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

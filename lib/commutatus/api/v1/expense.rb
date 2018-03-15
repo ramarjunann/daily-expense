@@ -7,29 +7,21 @@ module Commutatus
           desc 'Creates expense'
           params do
             requires :description, type: String
-            requires :category, type: String
             requires :amount, type: String
-            requires :user_id, type: String
+            requires :category, type: String
           end
           post '/', serializer: Serializer::Expense do
             authenticate!
 
             declared_params = declared(params)
-            user = Commutatus::User.find_by(uid: params[:user_id])
+            expense = current_user.expenses.build(declared_params)
 
-            if user
+            authorize!(:manage, expense)
 
-              expense = user.expenses.build(declared_params)
-              authorize!(:create, expense)
-
-              if expense.save
-                expense
-              else
-                error!({errors: expense.errors.full_messages, status: 'error'}, 422)
-              end
-
+            if expense.save
+              expense
             else
-              error!({errors: ['Expense not found'], status: 'error'}, 404)
+              error!({errors: expense.errors.full_messages, status: 'error'}, 422)
             end
 
           end
@@ -46,24 +38,15 @@ module Commutatus
             end
 
             desc 'Deletes expense'
-            params do
-            requires :user_id, type: String
-            end
             delete '/' do
               authenticate!
 
-              user = Commutatus::User.find_by(uid: params[:user_id])
+              expense = Commutatus::Expense.find_by!(uid: params[:id])
 
-              expense = user.expenses.find_by(uid: params[:id])
-
-              if user
-                if expense
-                  authorize!(:destroy, expense)
-                  expense.destroy
-                  {status: 'success'}
-                else
-                  error!({errors: ['Expense not found'], status: 'error'}, 404)
-                end
+              if expense
+                authorize!(:destroy, expense)
+                expense.destroy
+                {status: 'success'}
               else
                 error!({errors: ['Expense not found'], status: 'error'}, 404)
               end
@@ -72,27 +55,21 @@ module Commutatus
             desc 'Updates expense'
             params do
               optional :description, type: String
-              optional :category, type: String
               optional :amount, type: String
-              optional :user_id, type: String
+              optional :category, type: String
             end
             put '/', serializer: Serializer::Expense do
               authenticate!
 
               declared_params = declared(params)
-              user = Commutatus::User.find_by(uid: declared_params.delete(:user_id))
+              expense = current_user.expenses.find_by!(uid: params[:id])
 
-              if user
-                expense = user.expenses.find_by!(uid: params[:id])
                 authorize!(:update, expense)
 
-                if expense.update(declared_params)
-                  expense
-                else
-                  error!({errors:expense.errors.full_messages, status: 'error'}, 422)
-                end
+              if expense.update(declared_params)
+                expense
               else
-                  error!({errors: ['Expense not found'], status: 'error'}, 404)
+                error!({errors:expense.errors.full_messages, status: 'error'}, 422)
               end
             end
           end
@@ -106,7 +83,7 @@ module Commutatus
           get '/' do
             authenticate!
 
-            user = Commutatus::User.find_by!(uid: params[:seller_id])
+            user = Commutatus::User.find_by(uid: params[:user_id])
 
             if user
               expenses = user.expenses.order('created_at DESC').page(params[:page]).per(params[:per_page])

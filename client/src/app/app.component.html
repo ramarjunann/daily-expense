@@ -27,6 +27,25 @@
           <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="!tokenService.userSignedIn()">
             <a routerLink="user/register" class="nav-link g-py-7 g-px-0 login-nav text-white">Signup</a>
           </li>
+
+          <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="tokenService.userSignedIn()">
+            <a  routerLink="incoming/list" class="nav-link g-py-7 g-px-0 login-nav text-white">Income List</a>
+          </li>
+
+          <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="tokenService.userSignedIn()">
+            <a routerLink="expensing/list" class="nav-link g-py-7 g-px-0 login-nav text-white">
+            Expense List</a>
+          </li>
+
+          <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="tokenService.userSignedIn()">
+            <a  routerLink="income/add" class="nav-link g-py-7 g-px-0 login-nav text-white">Add Income</a>
+          </li>
+
+          <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="tokenService.userSignedIn()">
+            <a routerLink="expense/add" class="nav-link g-py-7 g-px-0 login-nav text-white">
+            Add Expense</a>
+          </li>
+
           <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf="tokenService.userSignedIn()">
             <div class="dropdown">
               <a class="nav-link g-py-7 g-px-0 login-nav text-white break-word">{{tokenService.currentUserData?.email}}</a>

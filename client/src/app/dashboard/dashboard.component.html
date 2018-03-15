@@ -1,7 +1,15 @@
-<div>
-  <h3 class="g-mt-20 g-ml-20">
+<div *ngIf="tokenService.currentUserData">
+  <h3 class="g-mt-130 text-center">
     Welcome {{tokenService.currentUserData?.first_name}}!<br>
     Let’s build out your
-    Daily expensive details...
+    Daily expensive details...<br>
+    <a class="btn btn-md u-btn-primary add-touch g-mt-20" data-toggle="modal" href="#"
+     title="Add product" routerLink="/income/add">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add Income
+    </a><br>
+    <a class="btn btn-md u-btn-primary add-touch g-mt-20" data-toggle="modal" href="#"
+     title="Add product" routerLink="/expense/add">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add Expense
+    </a>
   </h3>
 </div>

@@ -8,27 +8,19 @@ module Commutatus
           params do
             requires :description, type: String
             requires :amount, type: String
-            requires :user_id, type: String
           end
           post '/', serializer: Serializer::Income do
             authenticate!
 
             declared_params = declared(params)
-            user = Commutatus::User.find_by(uid: params[:user_id])
+            income = current_user.incomes.build(declared_params)
 
-            if user
+            authorize!(:manage, income)
 
-              income = user.incomes.build(declared_params)
-              authorize!(:create, income)
-
-              if income.save
-                income
-              else
-                error!({errors: income.errors.full_messages, status: 'error'}, 422)
-              end
-
+            if income.save
+              income
             else
-              error!({errors: ['Income not found'], status: 'error'}, 404)
+              error!({errors: income.errors.full_messages, status: 'error'}, 422)
             end
 
           end
@@ -45,24 +37,15 @@ module Commutatus
             end
 
             desc 'Deletes income'
-            params do
-            requires :user_id, type: String
-            end
             delete '/' do
               authenticate!
 
-              user = Commutatus::User.find_by(uid: params[:user_id])
+              income = Commutatus::Income.find_by!(uid: params[:id])
 
-              income = user.incomes.find_by(uid: params[:id])
-
-              if user
-                if income
-                  authorize!(:destroy, income)
-                  income.destroy
-                  {status: 'success'}
-                else
-                  error!({errors: ['Income not found'], status: 'error'}, 404)
-                end
+              if income
+                authorize!(:destroy, income)
+                income.destroy
+                {status: 'success'}
               else
                 error!({errors: ['Income not found'], status: 'error'}, 404)
               end
@@ -72,25 +55,19 @@ module Commutatus
             params do
               optional :description, type: String
               optional :amount, type: String
-              optional :user_id, type: String
             end
             put '/', serializer: Serializer::Income do
               authenticate!
 
               declared_params = declared(params)
-              user = Commutatus::User.find_by(uid: declared_params.delete(:user_id))
+              income = current_user.incomes.find_by!(uid: params[:id])
 
-              if user
-                income = user.incomes.find_by!(uid: params[:id])
                 authorize!(:update, income)
 
-                if income.update(declared_params)
-                  income
-                else
-                  error!({errors:income.errors.full_messages, status: 'error'}, 422)
-                end
+              if income.update(declared_params)
+                income
               else
-                  error!({errors: ['Income not found'], status: 'error'}, 404)
+                error!({errors:income.errors.full_messages, status: 'error'}, 422)
               end
             end
           end
@@ -104,7 +81,7 @@ module Commutatus
           get '/' do
             authenticate!
 
-            user = Commutatus::User.find_by!(uid: params[:seller_id])
+            user = Commutatus::User.find_by(uid: params[:user_id])
 
             if user
               incomes = user.incomes.order('created_at DESC').page(params[:page]).per(params[:per_page])
