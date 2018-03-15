@@ -25,10 +25,6 @@ export class IncomeService {
     return this.tokenService.delete(this.incomeApiURL + '/' + id);
   }
 
-  update(id: string, income: Income): Observable<any> {
-    return this.tokenService.put(this.incomeApiURL + '/' + id, income);
-  }
-
   list(pageNumber: number, incomesPerPage: number, userId: string):  Observable<any> {
     let param: any  = {
       page: pageNumber,

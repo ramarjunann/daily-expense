@@ -16,9 +16,6 @@ module Commutatus
             declared_params = declared(params)
             expense = current_user.expenses.build(declared_params)
 
-            p 'dsdsdsa'
-            p '222222222222222222222222222222222222222'
-
             authorize!(:create, expense)
 
             if expense.save

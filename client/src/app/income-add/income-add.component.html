@@ -11,9 +11,8 @@
 <div class="container g-py-50">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="incomeForm" (ngSubmit)="onSubmit()"
-            ngFormModel="income">
- <!-- Input with Autocomplete -->
+      <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="incomeForm" (ngSubmit)="onSubmit()" ngFormModel="income">
+        <!-- Input with Autocomplete -->
         <div class="form-group g-mb-20">
           <label class="g-mb-10" for="description">
             <span *ngIf="!formErrors.description"

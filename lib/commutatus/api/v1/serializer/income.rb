@@ -3,7 +3,7 @@ module Commutatus
     module V1
       module Serializer
         class Income < ActiveModel::Serializer
-          attributes :id, :user_id, :amount, :uid, :description, :created_date
+          attributes :id, :user_id, :amount, :description, :created_date
 
           def id
             object.uid

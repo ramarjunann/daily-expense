@@ -26,10 +26,6 @@ export class ExpenseService {
     return this.tokenService.delete(this.expenseApiURL + '/' + id);
   }
 
-  update(id: string, expense: Expense): Observable<any> {
-    return this.tokenService.put(this.expenseApiURL + '/' + id, expense);
-  }
-
   list(pageNumber: number, expensesPerPage: number, userId: string):  Observable<any> {
     let param: any  = {
       page: pageNumber,

@@ -142,5 +142,8 @@ export class ExpenseAddComponent implements OnInit {
     }
   }
 
+  public onExpenseCancel(): void {
+    this.router.navigate(['/expencing/list']);
+  }
 
 }

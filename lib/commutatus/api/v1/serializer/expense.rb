@@ -3,7 +3,7 @@ module Commutatus
     module V1
       module Serializer
         class Expense < ActiveModel::Serializer
-          attributes :id, :user_id, :amount, :category, :uid, :description, :created_date
+          attributes :id, :user_id, :amount, :category, :description, :created_date
 
           def id
             object.uid

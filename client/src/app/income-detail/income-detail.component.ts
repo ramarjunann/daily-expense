@@ -58,6 +58,7 @@ export class IncomeDetailComponent implements OnInit {
   public removeIncome(income: any): void {
     this.notificationService.confirm('incomeRemove',
       () => {
+        console.log('ram');
         return this.incomeService.remove(income.id).toPromise();
       }
       ,

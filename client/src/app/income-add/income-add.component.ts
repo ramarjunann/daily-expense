@@ -45,7 +45,6 @@ export class IncomeAddComponent implements OnInit {
   // Public properties
   public income : Income = new Income();
   public incomeForm: FormGroup;
-  public incomeUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
 
   constructor(
@@ -69,11 +68,10 @@ export class IncomeAddComponent implements OnInit {
       return;
     }
     this.income = this.incomeForm.value;
-
+      console.log('32111')
       this.incomeService.add(this.income).subscribe(
         successResponse => {
           this.successHandler(successResponse);
-          this.notificationService.notify('incomeAdd', 'success');
         },
         errorResponse   => {
           this.errorHandler(errorResponse);
@@ -132,6 +130,10 @@ export class IncomeAddComponent implements OnInit {
     if(data.errors.length > 0) {
       this.errorMessage = data.errors.join(', ')
     }
+  }
+
+  public onIncomeCancel(): void {
+    this.router.navigate(['/incoming/list']);
   }
 
 }
