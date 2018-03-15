@@ -8,7 +8,6 @@ import {Subscription} from 'rxjs';
 import { Angular2TokenService } from 'angular2-token';
 import * as _ from 'lodash';
 
-// Retailyoda Modules
 import { ExpenseService } from '../expense.service';
 import { NotificationService } from '../notification.service';
 import { Expense } from '../expense';
@@ -38,8 +37,8 @@ export class ExpenseAddComponent implements OnInit {
       'required': 'Description is required.'
     },
     'amount': {
-      'required': 'Wholesale price is required.',
-      'pattern': 'Wholesale price should be number'
+      'required': 'Amount is required.',
+      'pattern': 'Amount should be number'
     },
     'category': {
       'required': 'Category is required.'

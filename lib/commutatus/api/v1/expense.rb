@@ -16,7 +16,10 @@ module Commutatus
             declared_params = declared(params)
             expense = current_user.expenses.build(declared_params)
 
-            authorize!(:manage, expense)
+            p 'dsdsdsa'
+            p '222222222222222222222222222222222222222'
+
+            authorize!(:create, expense)
 
             if expense.save
               expense
@@ -49,27 +52,6 @@ module Commutatus
                 {status: 'success'}
               else
                 error!({errors: ['Expense not found'], status: 'error'}, 404)
-              end
-            end
-
-            desc 'Updates expense'
-            params do
-              optional :description, type: String
-              optional :amount, type: String
-              optional :category, type: String
-            end
-            put '/', serializer: Serializer::Expense do
-              authenticate!
-
-              declared_params = declared(params)
-              expense = current_user.expenses.find_by!(uid: params[:id])
-
-                authorize!(:update, expense)
-
-              if expense.update(declared_params)
-                expense
-              else
-                error!({errors:expense.errors.full_messages, status: 'error'}, 422)
               end
             end
           end

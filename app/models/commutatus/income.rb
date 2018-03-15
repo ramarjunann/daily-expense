@@ -10,6 +10,6 @@ module Commutatus
 
     # Associations
     # ============
-    belongs_to :user
+    belongs_to :user, inverse_of: :incomes
   end
 end

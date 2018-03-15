@@ -50,26 +50,6 @@ module Commutatus
                 error!({errors: ['Income not found'], status: 'error'}, 404)
               end
             end
-
-            desc 'Updates income'
-            params do
-              optional :description, type: String
-              optional :amount, type: String
-            end
-            put '/', serializer: Serializer::Income do
-              authenticate!
-
-              declared_params = declared(params)
-              income = current_user.incomes.find_by!(uid: params[:id])
-
-                authorize!(:update, income)
-
-              if income.update(declared_params)
-                income
-              else
-                error!({errors:income.errors.full_messages, status: 'error'}, 422)
-              end
-            end
           end
 
           desc 'Gets income with pagination support'

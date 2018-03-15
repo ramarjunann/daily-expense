@@ -19,11 +19,9 @@ import { HomeComponent } from './home/home.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeAddComponent } from './income-add/income-add.component';
-import { IncomeUpdateComponent } from './income-update/income-update.component';
 import { IncomeListComponent } from './income-list/income-list.component';
 import { IncomeDetailComponent } from './income-detail/income-detail.component';
 import { ExpenseAddComponent } from './expense-add/expense-add.component';
-import { ExpenseUpdateComponent } from './expense-update/expense-update.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { ExpenseDetailComponent } from './expense-detail/expense-detail.component';
 
@@ -35,11 +33,9 @@ import { ExpenseDetailComponent } from './expense-detail/expense-detail.componen
     UserRegistrationComponent,
     DashboardComponent,
     IncomeAddComponent,
-    IncomeUpdateComponent,
     IncomeListComponent,
     IncomeDetailComponent,
     ExpenseAddComponent,
-    ExpenseUpdateComponent,
     ExpenseListComponent,
     ExpenseDetailComponent
   ],
@@ -69,20 +65,12 @@ import { ExpenseDetailComponent } from './expense-detail/expense-detail.componen
         component: IncomeAddComponent
       },
       {
-        path: 'income/:id/update',
-        component: IncomeUpdateComponent
-      },
-      {
         path: 'income/:id',
         component: IncomeDetailComponent
       },
       {
         path: 'expense/add',
         component: ExpenseAddComponent
-      },
-      {
-        path: 'expense/:id/update',
-        component: ExpenseUpdateComponent
       },
       {
         path: 'expense/:id',

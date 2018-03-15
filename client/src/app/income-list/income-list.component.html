@@ -34,7 +34,7 @@
                 <tr *ngFor="let income of incomes" >
                   <td><a [routerLink]="['/income/' + income?.id]">{{income.description}}</a></td>
                   <td>{{income.amount}}</td>
-                  <td>{{incomep.created_date}}</td>
+                  <td>{{income.created_date}}</td>
                 </tr>
                 </tbody>
               </table>
